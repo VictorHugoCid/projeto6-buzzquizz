@@ -265,14 +265,14 @@ function sucessPage() {
   }
 
   for (s = 1; s <= numberLevels; s++) {
-    if (document.querySelector(`.level${s} .percentage`).value == 0) {
+    if (Number(document.querySelector(`.level${s} .percentage`).value) === 0) {
       test = true
       s = numberLevels + 1
     }
   }
 
   if (counter === Number(numberLevels) && test) {
-    let promise = axios.post(
+    axios.post(
       'https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes',
       object
     )
@@ -286,6 +286,7 @@ function sucessPage() {
         src="${quizzImg}"
         alt=""
       />
+      <div class="gradient"></div>
       <p>${quizzTitle}</p>
     </div>
     <button>Acessar Quizz</button>
