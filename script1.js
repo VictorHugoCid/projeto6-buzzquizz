@@ -1,4 +1,8 @@
+
+
 let quizzes = [];
+let generalCards;
+let userCards;
 let userQuizz = [
     {
         id: 1,
@@ -143,24 +147,47 @@ let userQuizz = [
     }
 ];
 
-insertUserQuizz();
+plotHTML();
 
 // GERAR A PÁGINA
 // 1- USERS QUIZZES
-function insertUserQuizz() {
+
+function plotHTML(){
+    setTimeout(window.scrollTo({top: 0, behavior: "smooth"}))
+    const ul = document.querySelector(".main-container")
+    ul.innerHTML = ``
+
+    ul.innerHTML +=`
+        <div class="box-myquizzes">
+            <div class="quizz-header">Seus Quizzes
+                <ion-icon name="add-circle" onclick="createQuizzPage()"></ion-icon>
+            </div>
+            <div class="my-quizzes" data-identifier="user-quizzes">
+            </div>
+        </div>
+        
+        <div class="box-quizzes">
+            <div class="quizz-header">Todos os Quizzes</div>
+
+            <div class="quizzes" data-identifier="general-quizzes">
+            </div>
+        </div>`
+
+        insertUserQuizz();
+        getGeneralQuizz();
+}
+
+ function insertUserQuizz() {
 
     if (userQuizz.length !== 0) {
-        console.log("tem userQuizz")
         getUserQuizz();
     } else {
-        console.log("nao tem useQuizz")
         dashedBox();
     }
 }
 
 function dashedBox() {
     const ul = document.querySelector(".box-myquizzes")
-    //console.log(ul)
     ul.innerHTML = ``
     ul.innerHTML += `
         <div class="dashed-box">
@@ -174,20 +201,6 @@ function dashedBox() {
 
 function getUserQuizz() {
     const ul = document.querySelector(".my-quizzes")
-    //console.log(ul)
-
-
-/*   <div class="box-myquizzes"> 
-        <div class="quizz-header">
-            Seus Quizzes
-            <ion-icon name="add-circle" onclick="createQuizzPage()"></ion-icon>
-        </div>
-
-        <div class="my-quizzes" data-identifier="user-quizzes"> 
-        </div>  
-    </div> */
-//REEESTRUTURAÇÃO DO HTML E RIMEIRA PÁGINA
-
 
     ul.innerHTML = ``;
     for (let i = 0; i < userQuizz.length; i++) {
@@ -199,22 +212,15 @@ function getUserQuizz() {
             <div class="quizz-card" data-identifier="quizz-card" id = "${id}" onclick="startQuizz(this)">
                 <div class="overlay"></div>
                 <p>${title}</p>
-                <img src="${img}" >
+                <img src="${img}">
             </div>
         `;
     }
 }
 
-
 //2- GENERAL QUIZZES
-
-getGeneralQuizz();
 function getGeneralQuizz() {
-    // fazer get de todos os quizzes e testar no console
-
     const promise = axios.get(`https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes`)
-    
-
     promise
         .catch(errorAlert)
         .then(populateGeneralQuizz)
@@ -222,36 +228,18 @@ function getGeneralQuizz() {
 
 function populateGeneralQuizz(resposta) {
     quizzes = resposta.data
-    //console.log(quizzes)
 
     plotGeneralQuizz();
 }
 
 function plotGeneralQuizz() {
-    //console.log(quizzes)
-    const ul = document.querySelector(".quizzes")
-
-    //REEESTRUTURAÇÃO DO HTML E RIMEIRA PÁGINA
-/*   <div class="box-quizzes">
-        <div class="quizz-header">Todos os Quizzes</div>
-
-        <div class="quizzes"data-identifier="general-quizzes>
-        </div>
-    </div> */
-
-    //REEESTRUTURAÇÃO DO HTML E RIMEIRA PÁGINA
-
-
-
-
-    ul.innerHTML = ``
+    generalCards = ""
     for (let i = 1; i < quizzes.length; i++) {
-
+        
         const id = quizzes[i].id;
         const img = quizzes[i].image;
         const title = quizzes[i].title;
-
-        ul.innerHTML += `
+        generalCards += `
             <div class="quizz-card" data-identifier="quizz-card" id = "${id}" onclick="startQuizz(this)">
                 <div class="overlay"></div>
                 <p>${title}</p>
@@ -260,11 +248,16 @@ function plotGeneralQuizz() {
         `
     }
 
+    const ul = document.querySelector(".quizzes")
+    ul.innerHTML = ``
+
+    ul.innerHTML += `
+        ${generalCards}
+    `
 }
 
 function errorAlert() {
     console.log(`Erroooooouuuuuu`)
 }
 
-//função q vai pra página de fazer o quizz
 
