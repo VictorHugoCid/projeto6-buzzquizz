@@ -180,8 +180,11 @@ function plotHTML(){
  function insertUserQuizz() {
 
     if (userQuizz.length !== 0) {
+        console.log("tem user quizz")
         getUserQuizz();
     } else {
+        console.log("nao tem user quizz")
+
         dashedBox();
     }
 }

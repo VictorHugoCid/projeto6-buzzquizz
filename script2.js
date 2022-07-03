@@ -211,7 +211,6 @@ function backHome(){
     home.innerHTML +=`
     `
     plotHTML();
-    window.scrollTo({top: 0, behavior: "smooth"});
 }
 
 function restartQuizz(){

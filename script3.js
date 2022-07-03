@@ -133,7 +133,7 @@ function createLevelsPage() {
   for (q = 1; q <= numberQuestions; q++) {
     if (
       document.querySelector(`.question${q} .questionTitle`).value.length >=
-        20 &&
+      20 &&
       document.querySelector(`.question${q} .color`).value.length === 7 &&
       document.querySelector(`.question${q} .color`).value[0] === '#' &&
       document.querySelector(`.question${q} .rightAnswer`).value !== '' &&
@@ -282,47 +282,80 @@ function sucessPage() {
 
     promise.then(saveUserQuizz)
 
-    function saveUserQuizz(objectId) {
+/*     function saveUserQuizz(objectId) {
+      console.log('Agora foi')
+
       let SerOwnQuizzes = localStorage.getItem('UserQuizzesIds')
       let DesOwnQuizzes = JSON.parse(SerOwnQuizzes)
+
       ownQuizz = objectId.data.id
       DesOwnQuizzes.push(ownQuizz)
       localStorage.removeItem('UserQuizzesIds')
       SerOwnQuizzes = JSON.stringify(DesOwnQuizzes)
       localStorage.setItem('UserQuizzesIds', SerOwnQuizzes)
-      console.log('Agora foi')
 
       giveUserQuizz();
+    } */
+
+    function saveUserQuizz(objectId) {
+      console.log('Agora foi')
+      let SerOwnQuizzes = localStorage.getItem('UserQuizzesIds')
+      let DesOwnQuizzes = JSON.parse(SerOwnQuizzes)
+
+      if (DesOwnQuizzes !== null) {
+
+        ownQuizz = objectId.data.id
+        DesOwnQuizzes.push(ownQuizz)
+        localStorage.removeItem('UserQuizzesIds')
+        SerOwnQuizzes = JSON.stringify(DesOwnQuizzes)
+        localStorage.setItem('UserQuizzesIds', SerOwnQuizzes)
+
+      } else {
+        DesOwnQuizzes = [];
+        
+        ownQuizz = objectId.data.id
+        DesOwnQuizzes.push(ownQuizz)
+        SerOwnQuizzes = JSON.stringify(DesOwnQuizz)
+        localStorage.setItem('UserQuizzesIds', SerOwnQuizzes)
+
+      }
+
+
+      giveUserQuizz()
     }
 
     function giveUserQuizz() {
       let SerOwnQuizzes = localStorage.getItem('UserQuizzesIds')
       let userQuizzId = JSON.parse(SerOwnQuizzes)
 
-/*       for (let i = 0; i < quizzes.length; i++) {
-        for (let q = 0; q < DesOwnQuizzes.length; q++) {
-          if (quizzes[i].id === DesOwnQuizzes[q]) {
-            userQuizz.push(quizzes[i])
-          }
-        }
-      } */
+      /*       for (let i = 0; i < quizzes.length; i++) {
+              for (let q = 0; q < DesOwnQuizzes.length; q++) {
+                if (quizzes[i].id === DesOwnQuizzes[q]) {
+                  userQuizz.push(quizzes[i])
+                }
+              }
+            } */
     }
 
     document.querySelector(
       '.main-container'
-    ).innerHTML = `<div class="quizzCreation4">
-    <h6>Seu quizz está pronto!</h6>
-    <div class="imgWrapper">
-      <img
-        src="${quizzImg}"
-        alt=""
-      />
-      <div class="gradient"></div>
-      <p>${quizzTitle}</p>
-    </div>
-    <button onclick="callQuizz(ownQuizz)">Acessar Quizz</button>
-    <button class="homeButton" onclick="backHome()">Voltar pra home</button>
-  </div>
+    ).innerHTML = `
+    <div class="quizzCreation4">
+      <h6>Seu quizz está pronto!</h6>
+
+      <div class="imgWrapper">
+        <img
+          src="${quizzImg}"
+          alt=""
+        />
+        <div class="gradient"></div>
+        <p>${quizzTitle}</p>
+      </div>
+
+      <button onclick="callQuizz(ownQuizz)">Acessar Quizz</button>
+
+      <button class="homeButton" onclick="backHome()">Voltar pra home</button>
+    </div>  
     `
   } else {
     alert('Dados incorretos. Favor corrigir.')
