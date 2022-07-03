@@ -3,6 +3,8 @@ let numberLevels = 0
 let counter = 0
 let quizzTitle = ''
 let object = {}
+let ownQuizz = 0
+let ownQuizzes = []
 
 function checkUrl(texto) {
   try {
@@ -280,12 +282,29 @@ function sucessPage() {
     promise.then(saveUserQuizz)
 
     function saveUserQuizz(objectId) {
-      let ownQuizz = objectId
-      let SerOwnQuizz = JSON.stringify(ownQuizz)
-      localStorage.setItem('ownQuiz', SerOwnQuizz)
+      let SerOwnQuizzes = localStorage.getItem('UserQuizzesIds')
+      let DesOwnQuizzes = JSON.parse(SerOwnQuizzes)
+      ownQuizz = objectId.data.id
+      DesOwnQuizzes.push(ownQuizz)
+      localStorage.removeItem('UserQuizzesIds')
+      SerOwnQuizzes = JSON.stringify(DesOwnQuizzes)
+      localStorage.setItem('UserQuizzesIds', SerOwnQuizzes)
       console.log('Agora foi')
-      console.log(objectId)
-      console.log(SerOwnQuizz)
+
+      giveUserQuizz()
+    }
+
+    function giveUserQuizz() {
+      let SerOwnQuizzes = localStorage.getItem('UserQuizzesIds')
+      let DesOwnQuizzes = JSON.parse(SerOwnQuizzes)
+
+      for (let i = 0; i < quizzes.length; i++) {
+        for (let q = 0; q < DesOwnQuizzes.length; q++) {
+          if (quizzes[i].id === DesOwnQuizzes[q]) {
+            userQuizz.push(quizzes[i])
+          }
+        }
+      }
     }
 
     document.querySelector(
@@ -300,7 +319,7 @@ function sucessPage() {
       <div class="gradient"></div>
       <p>${quizzTitle}</p>
     </div>
-    <button>Acessar Quizz</button>
+    <button onclick="callQuizz(ownQuizz)">Acessar Quizz</button>
     <button class="homeButton" onclick="backHome()">Voltar pra home</button>
   </div>
     `
