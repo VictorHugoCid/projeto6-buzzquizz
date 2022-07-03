@@ -272,10 +272,21 @@ function sucessPage() {
   }
 
   if (counter === Number(numberLevels) && test) {
-    axios.post(
+    let promise = axios.post(
       'https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes',
       object
     )
+
+    promise.then(saveUserQuizz)
+
+    function saveUserQuizz(objectId) {
+      let ownQuizz = objectId
+      let SerOwnQuizz = JSON.stringify(ownQuizz)
+      localStorage.setItem('ownQuiz', SerOwnQuizz)
+      console.log('Agora foi')
+      console.log(objectId)
+      console.log(SerOwnQuizz)
+    }
 
     document.querySelector(
       '.main-container'
@@ -290,7 +301,7 @@ function sucessPage() {
       <p>${quizzTitle}</p>
     </div>
     <button>Acessar Quizz</button>
-    <button class="homeButton">Voltar pra home</button>
+    <button class="homeButton" onclick="backHome()">Voltar pra home</button>
   </div>
     `
   } else {
