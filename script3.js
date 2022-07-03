@@ -5,7 +5,6 @@ let quizzTitle = ''
 let object = {}
 let ownQuizz = 0
 let ownQuizzes = []
-let userQuizzId = []
 let SerOwnQuizzes = []
 let DesOwnQuizzes = []
 
@@ -277,64 +276,6 @@ function sucessPage() {
   }
 
   if (counter === Number(numberLevels) && test) {
-    let promise = axios.post(
-      'https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes',
-      object
-    )
-
-    promise.then(saveUserQuizz)
-
-    /*     function saveUserQuizz(objectId) {
-      console.log('Agora foi')
-
-      let SerOwnQuizzes = localStorage.getItem('UserQuizzesIds')
-      let DesOwnQuizzes = JSON.parse(SerOwnQuizzes)
-
-      ownQuizz = objectId.data.id
-      DesOwnQuizzes.push(ownQuizz)
-      localStorage.removeItem('UserQuizzesIds')
-      SerOwnQuizzes = JSON.stringify(DesOwnQuizzes)
-      localStorage.setItem('UserQuizzesIds', SerOwnQuizzes)
-
-      giveUserQuizz();
-    } */
-
-    function saveUserQuizz(objectId) {
-      console.log('Agora foi')
-      SerOwnQuizzes = localStorage.getItem('UserQuizzesIds')
-      DesOwnQuizzes = JSON.parse(SerOwnQuizzes)
-
-      if (DesOwnQuizzes !== null) {
-        ownQuizz = objectId.data.id
-        DesOwnQuizzes.push(ownQuizz)
-        localStorage.removeItem('UserQuizzesIds')
-        SerOwnQuizzes = JSON.stringify(DesOwnQuizzes)
-        localStorage.setItem('UserQuizzesIds', SerOwnQuizzes)
-      } else {
-        DesOwnQuizzes = []
-
-        ownQuizz = objectId.data.id
-        DesOwnQuizzes.push(ownQuizz)
-        SerOwnQuizzes = JSON.stringify(DesOwnQuizzes)
-        localStorage.setItem('UserQuizzesIds', SerOwnQuizzes)
-      }
-
-      giveUserQuizz()
-    }
-
-    function giveUserQuizz() {
-      let SerOwnQuizzes = localStorage.getItem('UserQuizzesIds')
-      let userQuizzId = JSON.parse(SerOwnQuizzes)
-
-      /*       for (let i = 0; i < quizzes.length; i++) {
-              for (let q = 0; q < DesOwnQuizzes.length; q++) {
-                if (quizzes[i].id === DesOwnQuizzes[q]) {
-                  userQuizz.push(quizzes[i])
-                }
-              }
-            } */
-    }
-
     document.querySelector('.main-container').innerHTML = `
     <div class="quizzCreation4">
       <h6>Seu quizz está pronto!</h6>
@@ -353,9 +294,43 @@ function sucessPage() {
       <button class="homeButton" onclick="backHome()">Voltar pra home</button>
     </div>  
     `
+
+    let promise = axios.post(
+      'https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes',
+      object
+    )
+    promise.then(saveUserQuizz)
   } else {
     alert('Dados incorretos. Favor corrigir.')
     counter = 0
     test = false
   }
+}
+
+function saveUserQuizz(objectId) {
+  console.log('Agora foi')
+  SerOwnQuizzes = localStorage.getItem('UserQuizzesIds')
+  DesOwnQuizzes = JSON.parse(SerOwnQuizzes)
+
+  if (DesOwnQuizzes !== null) {
+    ownQuizz = objectId.data.id
+    DesOwnQuizzes.push(ownQuizz)
+    localStorage.removeItem('UserQuizzesIds')
+    SerOwnQuizzes = JSON.stringify(DesOwnQuizzes)
+    localStorage.setItem('UserQuizzesIds', SerOwnQuizzes)
+  } else {
+    DesOwnQuizzes = []
+
+    ownQuizz = objectId.data.id
+    DesOwnQuizzes.push(ownQuizz)
+    SerOwnQuizzes = JSON.stringify(DesOwnQuizzes)
+    localStorage.setItem('UserQuizzesIds', SerOwnQuizzes)
+  }
+
+  insertUserQuizz()
+}
+
+function giveUserQuizz() {
+  let SerOwnQuizzes = localStorage.getItem('UserQuizzesIds')
+  userQuizzId = JSON.parse(SerOwnQuizzes)
 }
