@@ -19,16 +19,20 @@ body {
   background-color: #EC362D;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
-  font-size: 37px;
-  font-weight: 700;
-  color: #ffffff;
+  
 
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 5;
+}
 
+.header h1{
+  font-size: 37px;
+  font-weight: 700;
+  color: #ffffff;
 
+  cursor: pointer;
 }
 
 .main-container {
@@ -102,7 +106,7 @@ body {
   left: 0;
   z-index: 1;
 
-  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57))
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5)54.68%, #000000 100%);
 }
 
 .quizz-card img {
@@ -113,6 +117,8 @@ body {
 }
 
 .quizz-card p {
+  position: absolute;
+  z-index: 1;
   color: #ffffff;
   position: absolute;
   bottom: 0px;
@@ -289,6 +295,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  cursor: pointer;
 }
 
 .home-endQuizz {
@@ -428,7 +436,6 @@ body {
 
     margin-bottom: 100px;
   }
-
 
 }
 
