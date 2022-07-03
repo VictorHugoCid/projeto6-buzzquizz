@@ -200,6 +200,23 @@ function dashedBox() {
 }
 
 function getUserQuizz() {
+
+    for (let i = 0; i < userQuizzId.length; i++) {
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/${userQuizzId[i]}`)
+
+        promise
+            .then(populateUserQuizz)
+    }  
+}
+
+function populateUserQuizz(resposta) {
+    quizzes = resposta.data
+    
+    plotUserQuizz();
+}
+
+function plotUserQuizz(){
+
     const ul = document.querySelector(".my-quizzes")
 
     ul.innerHTML = ``;
@@ -228,7 +245,7 @@ function getGeneralQuizz() {
 
 function populateGeneralQuizz(resposta) {
     quizzes = resposta.data
-
+    
     plotGeneralQuizz();
 }
 

@@ -5,6 +5,7 @@ let quizzTitle = ''
 let object = {}
 let ownQuizz = 0
 let ownQuizzes = []
+let userQuizzId = [];
 
 function checkUrl(texto) {
   try {
@@ -291,20 +292,20 @@ function sucessPage() {
       localStorage.setItem('UserQuizzesIds', SerOwnQuizzes)
       console.log('Agora foi')
 
-      giveUserQuizz()
+      giveUserQuizz();
     }
 
     function giveUserQuizz() {
       let SerOwnQuizzes = localStorage.getItem('UserQuizzesIds')
-      let DesOwnQuizzes = JSON.parse(SerOwnQuizzes)
+      let userQuizzId = JSON.parse(SerOwnQuizzes)
 
-      for (let i = 0; i < quizzes.length; i++) {
+/*       for (let i = 0; i < quizzes.length; i++) {
         for (let q = 0; q < DesOwnQuizzes.length; q++) {
           if (quizzes[i].id === DesOwnQuizzes[q]) {
             userQuizz.push(quizzes[i])
           }
         }
-      }
+      } */
     }
 
     document.querySelector(
