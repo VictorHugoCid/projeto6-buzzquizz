@@ -6,6 +6,8 @@ let object = {}
 let ownQuizz = 0
 let ownQuizzes = []
 let userQuizzId = []
+let SerOwnQuizzes = []
+let DesOwnQuizzes = []
 
 function checkUrl(texto) {
   try {
@@ -299,8 +301,8 @@ function sucessPage() {
 
     function saveUserQuizz(objectId) {
       console.log('Agora foi')
-      let SerOwnQuizzes = localStorage.getItem('UserQuizzesIds')
-      let DesOwnQuizzes = JSON.parse(SerOwnQuizzes)
+      SerOwnQuizzes = localStorage.getItem('UserQuizzesIds')
+      DesOwnQuizzes = JSON.parse(SerOwnQuizzes)
 
       if (DesOwnQuizzes !== null) {
         ownQuizz = objectId.data.id
@@ -313,7 +315,7 @@ function sucessPage() {
 
         ownQuizz = objectId.data.id
         DesOwnQuizzes.push(ownQuizz)
-        SerOwnQuizzes = JSON.stringify(DesOwnQuizz)
+        SerOwnQuizzes = JSON.stringify(DesOwnQuizzes)
         localStorage.setItem('UserQuizzesIds', SerOwnQuizzes)
       }
 
