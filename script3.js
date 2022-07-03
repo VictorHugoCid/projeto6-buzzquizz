@@ -22,7 +22,7 @@ function createQuizzPage() {
   <div class="basicInformations">
     <input type="text" class="title" placeholder="Título do seu quiz" />
     <input type="text" class="url" placeholder="URL da imagem do seu quiz" />
-    <input type="number" class="questions" placeholder="Quantidade de perguntas do quiz" />
+    <input type="number" class="questionsBasic" placeholder="Quantidade de perguntas do quiz" />
     <input type="number" class="levels" placeholder="Quantidade de níveis do quizz" />
   </div>
   <button onclick="createQuestionsPage()">Prosseguir para criar perguntas</button>
@@ -35,12 +35,12 @@ function createQuestionsPage() {
     document.querySelector('.title').value.length <= 60 &&
     document.querySelector('.title').value.length >= 20 &&
     urlTester &&
-    document.querySelector('.questions').value >= 3 &&
+    document.querySelector('.questionsBasic').value >= 3 &&
     document.querySelector('.levels').value >= 2
   ) {
     quizzTitle = document.querySelector('.title').value
     quizzImg = document.querySelector('.url').value
-    numberQuestions = document.querySelector('.questions').value
+    numberQuestions = document.querySelector('.questionsBasic').value
     numberLevels = document.querySelector('.levels').value
 
     object = { title: quizzTitle, image: quizzImg, questions: [], levels: [] }
@@ -203,14 +203,14 @@ function createLevelsPage() {
       document.querySelector('.quizzCreation3').innerHTML =
         document.querySelector('.quizzCreation3').innerHTML +
         `<div class="level${i}">
-        <div class="levelAll">
+        <div class="levelAll hidden">
         <p>Nível ${i}</p>
         <input type="text" class="title" placeholder="Título do nível" />
         <input type="number" class="percentage" placeholder="% de acerto mínima" />
         <input type="text" class="imgLevel${i}" placeholder="URL da imagem do nível" />
         <input type="text" class="description" placeholder="Descrição do nível" />
         </div>
-      <div class="miniLevel hidden">
+      <div class="miniLevel">
         <p>Nível ${i}</p>
         <ion-icon name="create-outline" onclick="showLevel(this)"></ion-icon>
       </div>`
@@ -265,14 +265,14 @@ function sucessPage() {
   }
 
   for (s = 1; s <= numberLevels; s++) {
-    if (document.querySelector(`.level${s} .percentage`).value == 0) {
+    if (Number(document.querySelector(`.level${s} .percentage`).value) === 0) {
       test = true
       s = numberLevels + 1
     }
   }
 
   if (counter === Number(numberLevels) && test) {
-    let promise = axios.post(
+    axios.post(
       'https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes',
       object
     )
@@ -286,6 +286,7 @@ function sucessPage() {
         src="${quizzImg}"
         alt=""
       />
+      <div class="gradient"></div>
       <p>${quizzTitle}</p>
     </div>
     <button>Acessar Quizz</button>
