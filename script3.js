@@ -280,7 +280,12 @@ function sucessPage() {
     promise.then(saveUserQuizz)
 
     function saveUserQuizz(objectId) {
+      let ownQuizz = objectId
+      let SerOwnQuizz = JSON.stringify(ownQuizz)
+      localStorage.setItem('ownQuiz', SerOwnQuizz)
       console.log('Agora foi')
+      console.log(objectId)
+      console.log(SerOwnQuizz)
     }
 
     document.querySelector(
