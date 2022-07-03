@@ -4,7 +4,7 @@ let quizzes = [];
 let generalCards;
 let userCards;
 let userQuizz = [
-    {
+    /* {
         id: 1,
         title: "Título do quizz",
         image: "https://http.cat/411.jpg",
@@ -144,7 +144,7 @@ let userQuizz = [
                 minValue: 50
             }
         ]
-    }
+    } */
 ];
 
 plotHTML();
