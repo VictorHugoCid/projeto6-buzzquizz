@@ -44,6 +44,7 @@ body {
 .quizz-header {
   width: 1051px;
   height: 20px;
+  margin-bottom: 5px;
 
   display: flex;
   align-items: center;

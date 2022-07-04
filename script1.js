@@ -37,8 +37,13 @@ function plotHTML() {
 }
 
 function insertUserQuizz() {
-  userQuizzId = JSON.parse(localStorage.getItem("UserQuizzesIds"));
 
+  if (localStorage.getItem("UserQuizzesIds") === null) {
+    userQuizzId = [];
+  } else {
+    userQuizzId = JSON.parse(localStorage.getItem("UserQuizzesIds"));
+  }
+  
   if (userQuizzId.length !== 0) {
     //console.log('tem user quizz')
     getUserQuizz()
