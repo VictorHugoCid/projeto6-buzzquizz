@@ -327,6 +327,7 @@ function saveUserQuizz(objectId) {
     localStorage.setItem('UserQuizzesIds', SerOwnQuizzes)
   }
 
+  giveUserQuizz()
   insertUserQuizz()
 }
 
