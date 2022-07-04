@@ -4,10 +4,7 @@ let generalCards
 let userCards
 let userQuizzId = []
 let arrayUser = []
-
-
 plotHTML();
-
 // GERAR A PÁGINA
 // 1- USERS QUIZZES
 
