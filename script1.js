@@ -73,7 +73,6 @@ function getUserQuizz() {
   }
 }
 
-
 function plotUserQuizz(resposta) {
 
   const ul = document.querySelector('.my-quizzes')

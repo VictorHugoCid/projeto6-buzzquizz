@@ -330,7 +330,6 @@ function saveUserQuizz(objectId) {
 
   }
 
-
   giveUserQuizz()
   insertUserQuizz()
 }
