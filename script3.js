@@ -284,21 +284,8 @@ function sucessPage() {
 
     promise.then(saveUserQuizz)
 
-/*     function saveUserQuizz(objectId) {
-      console.log('Agora foi')
 
-      let SerOwnQuizzes = localStorage.getItem('UserQuizzesIds')
-      let DesOwnQuizzes = JSON.parse(SerOwnQuizzes)
-
-      ownQuizz = objectId.data.id
-      DesOwnQuizzes.push(ownQuizz)
-      localStorage.removeItem('UserQuizzesIds')
-      SerOwnQuizzes = JSON.stringify(DesOwnQuizzes)
-      localStorage.setItem('UserQuizzesIds', SerOwnQuizzes)
-
-      giveUserQuizz();
-    } */
-
+    
     function saveUserQuizz(objectId) {
       console.log('Agora foi')
       SerOwnQuizzes = localStorage.getItem('UserQuizzesIds')
